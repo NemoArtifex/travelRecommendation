@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Recommendation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--Beginning of internet provided html code for Task 2 NAVBAR-->
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">
+              <h4>Travel Recommendation</h4>
+            </div>
+            <a href="travel_recommendation.html">Home</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+        <div class="search-container">
+            <form onsubmit="performSearch(event)">
+                <input type="search" id="search-input" placeholder="Enter a destination or keyword" />
+                <button type="submit">Search</button>
+                <button type="reset" onclick="clearSearch()">Clear</button>
+            </form>
+            </div>
+        </nav>
+    </header>
+<!--   TASK 3 Home Page  -->
+    <main>
+        
+        <h1 class="home-page">EXPLORE<br>YOUR<br>DREAM<br>
+            DESTINATION</h1>
+            <p class="home-page">
+             Welcome to Travel Recommendation: your travel recommendation website.
+             You can enter a destination and you will be "transported" to
+             your dream vacation spot.
+            </p> 
+            <p> BOOK NOW! </p>
+    </main>
+    <script src="travel_recommendation.js"></script>       
+</body>
+</html>

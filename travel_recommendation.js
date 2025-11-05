@@ -19,7 +19,7 @@ const canonicalMap={
 //================FUNCTION to retrieve canonical form==========//
 function getCanonicalForm(input){
     //convert input to lowercase for case-insensitivity, then check map
-    return canonicalMap[input.LowerCase()]||input;//fallback to original if not found
+    return canonicalMap[input.toLowerCase()]||input;//fallback to original if not found
 }
 
 //===================FUNCTION performSearch ======================================//
@@ -42,36 +42,41 @@ function performSearch() {
       })
 
       .then(data => {
-        let result;
         if (finalInput === 'countries') {
             // Handle countries as a special case since structure is different
             let htmlContent = '';
              data.countries.forEach(country => {
               country.cities.forEach(city => {
                 htmlContent += `
+                    <div class="recommendation-card">
                     <h2>${city.name}</h2>
                     <p>${city.description}</p>
-                    <img src="${city.imageUrl}"/>
+                    <img src="${city.imageUrl}" alt="${city.name}"/>
+                    </div>
                 `;
             });
         });
         recommendationDiv.innerHTML = htmlContent;
-        } else if (finalInput === 'temples') {
-            result = data.temples;
-        } else if (finalInput === 'beaches') {
-            result = data.beaches;
+        } else if (finalInput === 'temples'&& data.temples) {
+            recommendationDiv.innterHTML=`
+            <div class="recommendation-card">
+            <h2>${data.temples.name}</h2>
+            <p>${data.temples.description}</p>
+            <img src="${data.temples.imageUrl}" alt="${data.temples.name}"/>
+            </div>
+            `;
+        } else if (finalInput === 'beaches' && data.beaches) {
+            recommendationDiv.innterHTML=`
+            <div class="recommendation-card">
+            <h2>${data.beaches.name}</h2>
+            <p>${data.beaches.description}</p>
+            <img src="${data.beaches.imageUrl}" alt="${data.beaches.name}"/>
+            </div>
+            `;
         } else {
             recommendationDiv.innerHTML = "Destination Not Found";
-            return;
-    }
-
-    recommendationDiv.innerHTML = `
-        <h2>${result.name}</h2>
-        <p>${result.description}</p>
-        <img src="${result.imageUrl}"/>
-    `;
-})
-
+        }
+    })
     .catch(error=>{
         console.error('Error:', error);
         recommendationDiv.innerHTML="An error occurred while fetching data.";

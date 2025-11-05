@@ -16,13 +16,13 @@ const canonicalMap={
     "Country":"countries",
     "Countries":"countries"
 };
-//FUNCTION to retrieve canonical form
+//================FUNCTION to retrieve canonical form==========//
 function getCanonicalForm(input){
     //convert input to lowercase for case-insensitivity, then check map
     return canonicalMap[input.LowerCase()]||input;//fallback to original if not found
 }
 
-//FUNCTION performSearch
+//===================FUNCTION performSearch ======================================//
 function performSearch() {
     const input=document.getElementById('searchInput').value.toLowerCase();
     const recommendationDiv=document.getElementById('travelRecommendation');
@@ -41,35 +41,48 @@ function performSearch() {
       return response.json();
       })
 
-    .then(data=>{
-// TODO logic for specific site based on "countries","beaches" or "temples"
-        let result=null;
-// search within the "countries" data, which is an array of objects
-    if (data.countries){
-//Destination details for "countries"
-     recommendationDiv.innerHTML=`
-       <h2>${result.name}</h2>
-       <p>${result.description}</p>
-       <img src="${result.imageUrl}"/>
-     `;
-
-    } else if (data."temples" === finalInput){
-// todo logic provide destination details for "temples"
-   console.log("Key 'temples' does not exist.");
-    } else if (data."beaches"=== finalInput){
-// todo logic to provide destination details for "beaches"
-    console.log("Key 'beaches' does not exist.")
-    } else {
-     recommendationDiv.innerHTML="Destination Not Found";
+      .then(data => {
+        let result;
+        if (finalInput === 'countries') {
+            // Handle countries as a special case since structure is different
+            let htmlContent = '';
+             data.countries.forEach(country => {
+              country.cities.forEach(city => {
+                htmlContent += `
+                    <h2>${city.name}</h2>
+                    <p>${city.description}</p>
+                    <img src="${city.imageUrl}"/>
+                `;
+            });
+        });
+        recommendationDiv.innerHTML = htmlContent;
+        } else if (finalInput === 'temples') {
+            result = data.temples;
+        } else if (finalInput === 'beaches') {
+            result = data.beaches;
+        } else {
+            recommendationDiv.innerHTML = "Destination Not Found";
+            return;
     }
 
-    })
+    recommendationDiv.innerHTML = `
+        <h2>${result.name}</h2>
+        <p>${result.description}</p>
+        <img src="${result.imageUrl}"/>
+    `;
+})
+
     .catch(error=>{
         console.error('Error:', error);
         recommendationDiv.innerHTML="An error occurred while fetching data.";
     });
 }
 
+//========= FUNCTION clearSearch ==================
+function clearSearch(){
+    document.getElementById('searchInput').value="";
+}
+//======= end function ============
 
 
 

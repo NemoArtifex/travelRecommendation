@@ -28,7 +28,7 @@ function performSearch() {
     const recommendationDiv=document.getElementById('travelRecommendation');
     recommendationDiv.innerHTML='';
 //    console.log("input:", input);
-
+    console.log('recommendationDiv:', recommendationDiv.innerHTML);
 // call canonical form function
     const finalInput=getCanonicalForm(input);
     console.log("finalInput:", finalInput);
@@ -83,9 +83,15 @@ function performSearch() {
             `;
         });
         } 
+        // recommended console.log =========
+        console.log("Attempting to update div.");
+        console.log("Found div:", recommendationDiv);
+        console.log("HTML content:", htmlContent);
+     //   recommendationDiv.innerHTML = htmlContent;
+        recommendationDiv.innerHTML='test';
+        console.log("Div content after update:", recommendationDiv.innerHTML);
         
-        recommendationDiv.innerHTML = htmlContent;
-     
+        //===== end console.log =======
 })
 
     .catch(error=>{
@@ -93,6 +99,10 @@ function performSearch() {
         recommendationDiv.innerHTML=`<p>"An error occurred while fetching data."</p>`;
     });
 }
+// =================== Add an event listener to trigger the search =============
+// Assuming you have a button with the id 'searchButton'
+document.getElementById('searchButton').addEventListener('click', performSearch);
+
 
 //========= FUNCTION clearSearch ==================
 function clearSearch(){

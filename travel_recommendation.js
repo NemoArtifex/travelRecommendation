@@ -16,21 +16,25 @@ const canonicalMap={
     "Country":"countries",
     "Countries":"countries"
 };
+console.log("canonicalMap:", canonicalMap);
 //================FUNCTION to retrieve canonical form==========//
 function getCanonicalForm(input){
     //convert input to lowercase for case-insensitivity, then check map
     return canonicalMap[input.toLowerCase()]||input;//fallback to original if not found
 }
-
 //===================FUNCTION performSearch ======================================//
 function performSearch() {
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();}
     const input=document.getElementById('searchInput').value.toLowerCase();
     const recommendationDiv=document.getElementById('travelRecommendation');
     recommendationDiv.innerHTML='';
+    console.log("input:", input);
+
 
 // call canonical form function
     const finalInput=getCanonicalForm(input);
-
+    console.log("finalInput:", finalInput);
 //Fetch JSON file simulating an API
     fetch('travel_recommendation_api.json')
       .then(response=>{
@@ -42,6 +46,7 @@ function performSearch() {
       })
 
       .then(data => {
+        console.log('JSON data successfully fetched and parsed:', data);
         if (finalInput === 'countries') {
             // Handle countries as a special case since structure is different
             let htmlContent = '';

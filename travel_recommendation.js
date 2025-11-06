@@ -26,6 +26,7 @@ function getCanonicalForm(input){
 function performSearch() {
     const input=document.getElementById('searchInput').value.toLowerCase();
     const recommendationDiv=document.getElementById('travelRecommendation');
+    //console.log('TEST if there is a recommendation DIV:',recommendationDiv);
     recommendationDiv.innerHTML='';
 //    console.log("input:", input);
     console.log('recommendationDiv:', recommendationDiv.innerHTML);
@@ -84,12 +85,13 @@ function performSearch() {
         });
         } 
         // recommended console.log =========
-        console.log("Attempting to update div.");
-        console.log("Found div:", recommendationDiv);
-        console.log("HTML content:", htmlContent);
-     //   recommendationDiv.innerHTML = htmlContent;
-        recommendationDiv.innerHTML='test';
-        console.log("Div content after update:", recommendationDiv.innerHTML);
+        //console.log("Attempting to update div.");
+        //console.log("Found div:", recommendationDiv);
+        //console.log("HTML content:", htmlContent);
+        //====== OUTPUT ===========
+        recommendationDiv.innerHTML = htmlContent;
+        // ======= OUTPUT ==================
+        console.log("recommendationDiv content after update:", recommendationDiv.innerHTML);
         
         //===== end console.log =======
 })

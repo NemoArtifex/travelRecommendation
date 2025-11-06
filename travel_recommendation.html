@@ -19,15 +19,14 @@
            <div class="search-container">
             <form onsubmit="performSearch(event)">
                 <input type="search" id="searchInput" placeholder="Enter a destination or keyword" />
-                <button type="submit" id="searchButton" >Search</button>
-                <button type="reset" onclick="clearSearch()">Clear</button>
+                <button type="button" onclick="performSearch(event)" id="searchButton">Search</button>
+                <button type="button" onclick="clearSearch()" id="clearBtn">Clear</button>
             </form>
             </div>
         </nav>
     </header>
 <!--   TASK 3 Home Page  -->
-    <main>
-        
+    <main> 
         <h1 class="home-page">EXPLORE<br>YOUR<br>DREAM<br>
             DESTINATION</h1>
             <p class="home-page">
@@ -36,9 +35,8 @@
              your dream vacation spot.
             </p> 
             <p> BOOK NOW! </p>
-            <div id='travelRecommendation'></div>
     </main>
-       <!-- <div id='travelRecommendation'></div>  -->
+      <div id='travelRecommendation'></div>  -->
     <script src="travel_recommendation.js"></script>       
 </body>
 </html>
